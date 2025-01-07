@@ -1,4 +1,5 @@
-print('sae')
+print('xa')
+
 if UseUi then
 
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
@@ -5075,7 +5076,7 @@ if UseUi then
             notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notification.BorderSizePixel = 0
             notification.Position = UDim2.fromScale(0.5, 0.5)
-            notification.Size = UDim2.fromOffset((150) * scale, 0)
+            notification.Size = UDim2.fromOffset((50) * scale, 0)
         
             notification.Parent = notifications
         
