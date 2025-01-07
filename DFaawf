@@ -1,9 +1,9 @@
-print('sae')
+print('sxa')
 
 if UseUi then
 
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
-    local scale = 1 
+    local scale = 1
     
     local function calculateScale()
         local currentCamera = workspace.CurrentCamera
@@ -11,18 +11,18 @@ if UseUi then
             local screenSize = currentCamera.ViewportSize
             return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
         end
-        return 1 
+        return 1
     end
     
     local function updateScale()
         scale = calculateScale()
     end
-    
-    workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
 
-    
+    if not workspace.CurrentCamera then
+        workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
+    end
+
     updateScale()
-    
     workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale)
     
 
