@@ -1,16 +1,17 @@
+print('sa')
 
 if UseUi then
 
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
-    local scale = 3
+    local scale = 1
     
     local function calculateScale()
         local currentCamera = workspace.CurrentCamera
         if currentCamera then
             local screenSize = currentCamera.ViewportSize
-            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * 1.5
+            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * 1.2
         end
-        return 3
+        return 1
     end
     
     local function updateScale()
@@ -207,7 +208,7 @@ if UseUi then
         sidebar.BorderColor3 = Color3.fromRGB(0, 0, 0)
         sidebar.BorderSizePixel = 0
         sidebar.Position = UDim2.new(0, 0, 0, 0)
-        sidebar.Size = UDim2.new(0.100, 0, 1, 0) 
+        sidebar.Size = UDim2.new(0.250, 0, 1, 0) 
         sidebar.Parent = base
         
 
@@ -5075,7 +5076,7 @@ if UseUi then
             notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notification.BorderSizePixel = 0
             notification.Position = UDim2.fromScale(0.5, 0.5)
-            notification.Size = UDim2.fromOffset((Settings.SizeX or 250) * scale, 0)
+            notification.Size = UDim2.fromOffset((Settings.SizeX or 150) * scale, 0)
         
             notification.Parent = notifications
         
