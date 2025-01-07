@@ -1,3 +1,4 @@
+print('yoo')
 
 if UseUi then
     local MacLib = { 
@@ -156,7 +157,28 @@ if UseUi then
         base.BorderColor3 = Color3.fromRGB(0, 0, 0)
         base.BorderSizePixel = 0
         base.Position = UDim2.fromScale(0.5, 0.5)
-        base.Size = Settings.Size or UDim2.fromOffset(868, 650)
+        
+
+        local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
+        local BASE_SIZE = Vector2.new(868, 650) 
+        
+        local function calculateSize()
+            local screenSize = workspace.CurrentCamera.ViewportSize
+            local scaleX = screenSize.X / BASE_WIDTH
+            local scaleY = screenSize.Y / BASE_HEIGHT
+            local scale = math.min(scaleX, scaleY) 
+        
+            local width = BASE_SIZE.X * scale
+            local height = BASE_SIZE.Y * scale
+            return UDim2.fromOffset(width, height)
+        end
+        
+        base.Size = Settings.Size or calculateSize()
+        
+        workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+            base.Size = calculateSize()
+        end)
+        
 
         local baseUIScale = Instance.new("UIScale")
         baseUIScale.Name = "BaseUIScale"
@@ -536,7 +558,7 @@ if UseUi then
         informationGroupUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
         informationGroupUIListLayout.Parent = informationGroup
 
-        --[[
+ 
         local userId = LocalPlayer.UserId
         local thumbType = Enum.ThumbnailType.AvatarBust
         local thumbSize = Enum.ThumbnailSize.Size48x48
