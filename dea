@@ -1,3 +1,4 @@
+print('sae')
 
 if UseUi then
     local MacLib = { 
@@ -5918,7 +5919,8 @@ if UseUi then
                         Lifetime = 5
                     })
                 end,
-            }),
+            })
+            --[[
             ShowUserInfo = Window:GlobalSetting({
                 Name = "Show User Info",
                 Default = Window:GetUserInfoState(),
@@ -5931,6 +5933,7 @@ if UseUi then
                     })
                 end,
             })
+            --]]
         }
 
         local tabGroups = {
