@@ -1,3 +1,4 @@
+print('yo')
 
 if UseUi then
 
@@ -13,7 +14,7 @@ if UseUi then
     workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
         scale = calculateScale()
     end)
-    
+
     local MacLib = { 
         Options = {}, 
         Folder = "Maclib", 
@@ -1680,7 +1681,7 @@ if UseUi then
                     section.BackgroundTransparency = 0.98
                     section.BorderColor3 = Color3.fromRGB(0, 0, 0)
                     section.BorderSizePixel = 0
-                    section.Position = UDim2.fromScale(0, 6.78e-08)
+                    section.Position = UDim2.fromScale(0, 6.78e-08) -- This remains as it is relative positioning
                     section.Size = UDim2.fromScale(1, 0)
                     section.ClipsDescendants = true
                     section.Parent = Settings.Side == "Left" and left or right
@@ -1698,17 +1699,18 @@ if UseUi then
 
                     local sectionUIListLayout = Instance.new("UIListLayout")
                     sectionUIListLayout.Name = "SectionUIListLayout"
-                    sectionUIListLayout.Padding = UDim.new(0, 10)
+                    sectionUIListLayout.Padding = UDim.new(0, 10 * scale) -- Adjusted for scaling
                     sectionUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                     sectionUIListLayout.Parent = section
 
                     local sectionUIPadding = Instance.new("UIPadding")
                     sectionUIPadding.Name = "SectionUIPadding"
-                    sectionUIPadding.PaddingBottom = UDim.new(0, 20)
-                    sectionUIPadding.PaddingLeft = UDim.new(0, 20)
-                    sectionUIPadding.PaddingRight = UDim.new(0, 18)
-                    sectionUIPadding.PaddingTop = UDim.new(0, 22)
+                    sectionUIPadding.PaddingBottom = UDim.new(0, 20 * scale) -- Adjusted for scaling
+                    sectionUIPadding.PaddingLeft = UDim.new(0, 20 * scale)   -- Adjusted for scaling
+                    sectionUIPadding.PaddingRight = UDim.new(0, 18 * scale)  -- Adjusted for scaling
+                    sectionUIPadding.PaddingTop = UDim.new(0, 22 * scale)    -- Adjusted for scaling
                     sectionUIPadding.Parent = section
+
 
                     function SectionFunctions:Button(Settings, Flag)
                         local ButtonFunctions = {Settings = Settings}
@@ -1719,7 +1721,7 @@ if UseUi then
                         button.BackgroundTransparency = 1
                         button.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         button.BorderSizePixel = 0
-                        button.Size = UDim2.new(1, 0, 0, 38)
+                        button.Size = UDim2.new(1, 0, 0, 38 * scale)
                         button.Parent = section
 
                         local buttonInteract = Instance.new("TextButton")
@@ -1727,7 +1729,7 @@ if UseUi then
                         buttonInteract.FontFace = Font.new(assets.interFont)
                         buttonInteract.RichText = true
                         buttonInteract.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        buttonInteract.TextSize = 13
+                        buttonInteract.TextSize = 13 * scale
                         buttonInteract.TextTransparency = 0.5
                         buttonInteract.TextTruncate = Enum.TextTruncate.AtEnd
                         --buttonInteract.TextWrapped = true
@@ -1751,7 +1753,7 @@ if UseUi then
                         buttonImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         buttonImage.BorderSizePixel = 0
                         buttonImage.Position = UDim2.fromScale(1, 0.5)
-                        buttonImage.Size = UDim2.fromOffset(15, 15)
+                        buttonImage.Size = UDim2.fromOffset(15 * scale, 15 * scale)
                         buttonImage.Parent = button
 
                         local TweenSettings = {
@@ -1815,7 +1817,7 @@ if UseUi then
                         toggle.BackgroundTransparency = 1
                         toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         toggle.BorderSizePixel = 0
-                        toggle.Size = UDim2.new(1, 0, 0, 38)
+                        toggle.Size = UDim2.new(1, 0, 0, 38 * scale)
                         toggle.Parent = section
 
                         local toggleName = Instance.new("TextLabel")
@@ -1824,7 +1826,7 @@ if UseUi then
                         toggleName.Text = ToggleFunctions.Settings.Name
                         toggleName.RichText = true
                         toggleName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        toggleName.TextSize = 13
+                        toggleName.TextSize = 13 * scale
                         toggleName.TextTransparency = 0.5
                         toggleName.TextTruncate = Enum.TextTruncate.None
                         toggleName.TextWrapped = true
@@ -1838,7 +1840,7 @@ if UseUi then
                         toggleName.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         toggleName.BorderSizePixel = 0
                         toggleName.Position = UDim2.fromScale(0, 0.5)
-                        toggleName.Size = UDim2.new(1, -50, 0, 0)
+                        toggleName.Size = UDim2.new(1, -50 * scale, 0, 0)
                         toggleName.Parent = toggle
 
                         local toggle1 = Instance.new("ImageButton")
@@ -1852,15 +1854,15 @@ if UseUi then
                         toggle1.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         toggle1.BorderSizePixel = 0
                         toggle1.Position = UDim2.fromScale(1, 0.5)
-                        toggle1.Size = UDim2.fromOffset(41, 21)
+                        toggle1.Size = UDim2.fromOffset(41 * scale, 21 * scale)
                         toggle1.ImageTransparency = 0.5
 
                         local toggleUIPadding = Instance.new("UIPadding")
                         toggleUIPadding.Name = "ToggleUIPadding"
-                        toggleUIPadding.PaddingBottom = UDim.new(0, 1)
-                        toggleUIPadding.PaddingLeft = UDim.new(0, -2)
-                        toggleUIPadding.PaddingRight = UDim.new(0, 3)
-                        toggleUIPadding.PaddingTop = UDim.new(0, 1)
+                        toggleUIPadding.PaddingBottom = UDim.new(0, 1 * scale)
+                        toggleUIPadding.PaddingLeft = UDim.new(0, -2 * scale)
+                        toggleUIPadding.PaddingRight = UDim.new(0, 3 * scale)
+                        toggleUIPadding.PaddingTop = UDim.new(0, 1 * scale)
                         toggleUIPadding.Parent = toggle1
 
                         local togglerHead = Instance.new("ImageLabel")
@@ -1873,7 +1875,7 @@ if UseUi then
                         togglerHead.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         togglerHead.BorderSizePixel = 0
                         togglerHead.Position = UDim2.fromScale(0.5, 0.5)
-                        togglerHead.Size = UDim2.fromOffset(15, 15)
+                        togglerHead.Size = UDim2.fromOffset(15 * scale, 15 * scale)
                         togglerHead.ZIndex = 2
                         togglerHead.Parent = toggle1
                         togglerHead.ImageTransparency = 0.8
@@ -1956,7 +1958,7 @@ if UseUi then
                         slider.BackgroundTransparency = 1
                         slider.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         slider.BorderSizePixel = 0
-                        slider.Size = UDim2.new(1, 0, 0, 38)
+                        slider.Size = UDim2.new(1, 0, 0, 38 * scale)
                         slider.Parent = section
                     
                         local sliderName = Instance.new("TextLabel")
@@ -1965,7 +1967,7 @@ if UseUi then
                         sliderName.Text = SliderFunctions.Settings.Name
                         sliderName.RichText = true
                         sliderName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        sliderName.TextSize = 13
+                        sliderName.TextSize = 13 * scale
                         sliderName.TextTransparency = 0.5
                         sliderName.TextTruncate = Enum.TextTruncate.None
                         sliderName.TextWrapped = true
@@ -1994,7 +1996,7 @@ if UseUi then
                         sliderValue.Name = "SliderValue"
                         sliderValue.FontFace = Font.new(assets.interFont)
                         sliderValue.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        sliderValue.TextSize = 12
+                        sliderValue.TextSize = 12 * scale
                         sliderValue.TextTransparency = 0.1
                         sliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                         sliderValue.BackgroundTransparency = 0.95
@@ -2002,7 +2004,7 @@ if UseUi then
                         sliderValue.BorderSizePixel = 0
                         sliderValue.LayoutOrder = 1
                         sliderValue.Position = UDim2.fromScale(-0.0789, 0.171)
-                        sliderValue.Size = UDim2.fromOffset(41, 21)
+                        sliderValue.Size = UDim2.fromOffset(41 * scale, 21 * scale)
                         sliderValue.ClipsDescendants = true
                     
                         local sliderValueUICorner = Instance.new("UICorner")
@@ -2019,15 +2021,15 @@ if UseUi then
                     
                         local sliderValueUIPadding = Instance.new("UIPadding")
                         sliderValueUIPadding.Name = "SliderValueUIPadding"
-                        sliderValueUIPadding.PaddingLeft = UDim.new(0, 2)
-                        sliderValueUIPadding.PaddingRight = UDim.new(0, 2)
+                        sliderValueUIPadding.PaddingLeft = UDim.new(0, 2 * scale)
+                        sliderValueUIPadding.PaddingRight = UDim.new(0, 2 * scale)
                         sliderValueUIPadding.Parent = sliderValue
                     
                         sliderValue.Parent = sliderElements
                     
                         local sliderElementsUIListLayout = Instance.new("UIListLayout")
                         sliderElementsUIListLayout.Name = "SliderElementsUIListLayout"
-                        sliderElementsUIListLayout.Padding = UDim.new(0, 20)
+                        sliderElementsUIListLayout.Padding = UDim.new(0, 20 * scale)
                         sliderElementsUIListLayout.FillDirection = Enum.FillDirection.Horizontal
                         sliderElementsUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
                         sliderElementsUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
@@ -2043,7 +2045,7 @@ if UseUi then
                         sliderBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         sliderBar.BorderSizePixel = 0
                         sliderBar.Position = UDim2.fromScale(0.219, 0.457)
-                        sliderBar.Size = UDim2.fromOffset(123, 3)
+                        sliderBar.Size = UDim2.fromOffset(123 * scale, 3 * scale)
                     
                         local sliderHead = Instance.new("ImageButton")
                         sliderHead.Name = "SliderHead"
@@ -2054,7 +2056,7 @@ if UseUi then
                         sliderHead.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         sliderHead.BorderSizePixel = 0
                         sliderHead.Position = UDim2.fromScale(1, 0.5)
-                        sliderHead.Size = UDim2.fromOffset(12, 12)
+                        sliderHead.Size = UDim2.fromOffset(12 * scale, 12 * scale)
                         sliderHead.ZIndex = sliderValue.ZIndex - 1
                         sliderHead.Parent = sliderBar
                     
@@ -2244,7 +2246,7 @@ if UseUi then
                         input.BackgroundTransparency = 1
                         input.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         input.BorderSizePixel = 0
-                        input.Size = UDim2.new(1, 0, 0, 38)
+                        input.Size = UDim2.new(1, 0, 0, 38 * scale)
                         input.Parent = section
 
                         local inputName = Instance.new("TextLabel")
@@ -2253,7 +2255,7 @@ if UseUi then
                         inputName.Text = InputFunctions.Settings.Name
                         inputName.RichText = true
                         inputName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        inputName.TextSize = 13
+                        inputName.TextSize = 13 * scale
                         inputName.TextTransparency = 0.5
                         --inputName.TextTruncate = Enum.TextTruncate.AtEnd
                         inputName.TextTruncate = Enum.TextTruncate.None
@@ -2274,7 +2276,7 @@ if UseUi then
                         inputBox.FontFace = Font.new(assets.interFont)
                         inputBox.Text = "Hello world!"
                         inputBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        inputBox.TextSize = 12
+                        inputBox.TextSize = 12 * scale
                         inputBox.TextTransparency = 0.1
                         inputBox.AnchorPoint = Vector2.new(1, 0.5)
                         inputBox.AutomaticSize = Enum.AutomaticSize.X
@@ -2285,7 +2287,7 @@ if UseUi then
                         inputBox.ClipsDescendants = true
                         inputBox.LayoutOrder = 1
                         inputBox.Position = UDim2.fromScale(1, 0.5)
-                        inputBox.Size = UDim2.fromOffset(21, 21)
+                        inputBox.Size = UDim2.fromOffset(21 * scale, 21 * scale)
                         inputBox.TextXAlignment = Enum.TextXAlignment.Right
 
                         local inputBoxUICorner = Instance.new("UICorner")
@@ -2302,8 +2304,8 @@ if UseUi then
 
                         local inputBoxUIPadding = Instance.new("UIPadding")
                         inputBoxUIPadding.Name = "InputBoxUIPadding"
-                        inputBoxUIPadding.PaddingLeft = UDim.new(0, 5)
-                        inputBoxUIPadding.PaddingRight = UDim.new(0, 5)
+                        inputBoxUIPadding.PaddingLeft = UDim.new(0, 5 * scale)
+                        inputBoxUIPadding.PaddingRight = UDim.new(0, 5 * scale)
                         inputBoxUIPadding.Parent = inputBox
 
                         local inputBoxUISizeConstraint = Instance.new("UISizeConstraint")
