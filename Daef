@@ -1,4 +1,3 @@
-print('yoo')
 
 if UseUi then
     local MacLib = { 
@@ -196,8 +195,6 @@ if UseUi then
         baseUIStroke.Transparency = 0.9
         baseUIStroke.Parent = base
 
-        MakeResizable(base)
-
 
         local sidebar = Instance.new("Frame")
         sidebar.Name = "Sidebar"
@@ -205,8 +202,8 @@ if UseUi then
         sidebar.BackgroundTransparency = 1
         sidebar.BorderColor3 = Color3.fromRGB(0, 0, 0)
         sidebar.BorderSizePixel = 0
-        sidebar.Position = UDim2.new(0, 0, 0, 0) -- Always aligned to the left
-        sidebar.Size = UDim2.new(0.325, 0, 1, 0) -- 32.5% of the base frame's width
+        sidebar.Position = UDim2.new(0, 0, 0, 0)
+        sidebar.Size = UDim2.new(0.500, 0, 1, 0) 
         sidebar.Parent = base
         
 
@@ -368,6 +365,21 @@ if UseUi then
 
         controls.Parent = windowControls
 
+        --info rescaling
+        local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
+
+        local function calculateScale()
+            local screenSize = workspace.CurrentCamera.ViewportSize
+            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
+        end
+
+        local scale = calculateScale()
+
+        workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+            scale = calculateScale()
+        end)
+
+        -- Divider 1
         local divider1 = Instance.new("Frame")
         divider1.Name = "Divider"
         divider1.AnchorPoint = Vector2.new(0, 1)
@@ -376,20 +388,22 @@ if UseUi then
         divider1.BorderColor3 = Color3.fromRGB(0, 0, 0)
         divider1.BorderSizePixel = 0
         divider1.Position = UDim2.fromScale(0, 1)
-        divider1.Size = UDim2.new(1, 0, 0, 1)
+        divider1.Size = UDim2.new(1, 0, 0, 1 * scale)
         divider1.Parent = windowControls
 
         windowControls.Parent = sidebar
 
+        -- Information
         local information = Instance.new("Frame")
         information.Name = "Information"
         information.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         information.BackgroundTransparency = 1
         information.BorderColor3 = Color3.fromRGB(0, 0, 0)
         information.BorderSizePixel = 0
-        information.Position = UDim2.fromOffset(0, 31)
-        information.Size = UDim2.new(1, 0, 0, 60)
+        information.Position = UDim2.fromOffset(0, 31 * scale)
+        information.Size = UDim2.new(1, 0, 0, 60 * scale)
 
+        -- Divider 2
         local divider2 = Instance.new("Frame")
         divider2.Name = "Divider"
         divider2.AnchorPoint = Vector2.new(0, 1)
@@ -398,9 +412,10 @@ if UseUi then
         divider2.BorderColor3 = Color3.fromRGB(0, 0, 0)
         divider2.BorderSizePixel = 0
         divider2.Position = UDim2.fromScale(0, 1)
-        divider2.Size = UDim2.new(1, 0, 0, 1)
+        divider2.Size = UDim2.new(1, 0, 0, 1 * scale)
         divider2.Parent = information
 
+        -- Information Holder
         local informationHolder = Instance.new("Frame")
         informationHolder.Name = "InformationHolder"
         informationHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -411,12 +426,13 @@ if UseUi then
 
         local informationHolderUIPadding = Instance.new("UIPadding")
         informationHolderUIPadding.Name = "InformationHolderUIPadding"
-        informationHolderUIPadding.PaddingBottom = UDim.new(0, 10)
-        informationHolderUIPadding.PaddingLeft = UDim.new(0, 23)
-        informationHolderUIPadding.PaddingRight = UDim.new(0, 22)
-        informationHolderUIPadding.PaddingTop = UDim.new(0, 10)
+        informationHolderUIPadding.PaddingBottom = UDim.new(0, 10 * scale)
+        informationHolderUIPadding.PaddingLeft = UDim.new(0, 23 * scale)
+        informationHolderUIPadding.PaddingRight = UDim.new(0, 22 * scale)
+        informationHolderUIPadding.PaddingTop = UDim.new(0, 10 * scale)
         informationHolderUIPadding.Parent = informationHolder
 
+        -- Global Settings Button
         local globalSettingsButton = Instance.new("ImageButton")
         globalSettingsButton.Name = "GlobalSettingsButton"
         globalSettingsButton.Image = assets.globe
@@ -427,8 +443,9 @@ if UseUi then
         globalSettingsButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
         globalSettingsButton.BorderSizePixel = 0
         globalSettingsButton.Position = UDim2.fromScale(1, 0.5)
-        globalSettingsButton.Size = UDim2.fromOffset(16,16)
+        globalSettingsButton.Size = UDim2.fromOffset(16 * scale, 16 * scale)
         globalSettingsButton.Parent = informationHolder
+
 
         local function ChangeGlobalSettingsButtonState(State)
             if State == "Default" then
@@ -467,7 +484,7 @@ if UseUi then
         title.Text = Settings.Title
         title.TextColor3 = Color3.fromRGB(255, 255, 255)
         title.RichText = true
-        title.TextSize = 18
+        title.TextSize = 18 * scale
         title.TextTransparency = 0.1
         title.TextTruncate = Enum.TextTruncate.SplitWord
         title.TextXAlignment = Enum.TextXAlignment.Left
@@ -477,7 +494,7 @@ if UseUi then
         title.BackgroundTransparency = 1
         title.BorderColor3 = Color3.fromRGB(0, 0, 0)
         title.BorderSizePixel = 0
-        title.Size = UDim2.new(1, -20, 0, 0)
+        title.Size = UDim2.new(1, -20 * scale, 0, 0)
         title.Parent = titleFrame
 
         local subtitle = Instance.new("TextLabel")
@@ -491,7 +508,7 @@ if UseUi then
         subtitle.Text = Settings.Subtitle
         subtitle.RichText = true
         subtitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-        subtitle.TextSize = 12
+        subtitle.TextSize = 12 * scale
         subtitle.TextTransparency = 0.7
         subtitle.TextTruncate = Enum.TextTruncate.SplitWord
         subtitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -502,12 +519,12 @@ if UseUi then
         subtitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
         subtitle.BorderSizePixel = 0
         subtitle.LayoutOrder = 1
-        subtitle.Size = UDim2.new(1, -20, 0, 0)
+        subtitle.Size = UDim2.new(1, -20 * scale, 0, 0)
         subtitle.Parent = titleFrame
 
         local titleFrameUIListLayout = Instance.new("UIListLayout")
         titleFrameUIListLayout.Name = "TitleFrameUIListLayout"
-        titleFrameUIListLayout.Padding = UDim.new(0, 3)
+        titleFrameUIListLayout.Padding = UDim.new(0, 3 * scale)
         titleFrameUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
         titleFrameUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
         titleFrameUIListLayout.Parent = titleFrame
@@ -524,8 +541,8 @@ if UseUi then
         sidebarGroup.BackgroundTransparency = 1
         sidebarGroup.BorderColor3 = Color3.fromRGB(0, 0, 0)
         sidebarGroup.BorderSizePixel = 0
-        sidebarGroup.Position = UDim2.fromOffset(0, 91)
-        sidebarGroup.Size = UDim2.new(1, 0, 1, -91)
+        sidebarGroup.Position = UDim2.fromOffset(0, 91 * scale)
+        sidebarGroup.Size = UDim2.new(1, 0, 1, -91 * scale)
 
         local userInfo = Instance.new("Frame")
         userInfo.Name = "UserInfo"
@@ -535,7 +552,7 @@ if UseUi then
         userInfo.BorderColor3 = Color3.fromRGB(0, 0, 0)
         userInfo.BorderSizePixel = 0
         userInfo.Position = UDim2.fromScale(0, 1)
-        userInfo.Size = UDim2.new(1, 0, 0, 107)
+        userInfo.Size = UDim2.new(1, 0, 0, 107 * scale)
 
         local informationGroup = Instance.new("Frame")
         informationGroup.Name = "InformationGroup"
@@ -547,8 +564,8 @@ if UseUi then
 
         local informationGroupUIPadding = Instance.new("UIPadding")
         informationGroupUIPadding.Name = "InformationGroupUIPadding"
-        informationGroupUIPadding.PaddingBottom = UDim.new(0, 17)
-        informationGroupUIPadding.PaddingLeft = UDim.new(0, 25)
+        informationGroupUIPadding.PaddingBottom = UDim.new(0, 17 * scale)
+        informationGroupUIPadding.PaddingLeft = UDim.new(0, 25 * scale)
         informationGroupUIPadding.Parent = informationGroup
 
         local informationGroupUIListLayout = Instance.new("UIListLayout")
@@ -557,6 +574,7 @@ if UseUi then
         informationGroupUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
         informationGroupUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
         informationGroupUIListLayout.Parent = informationGroup
+        informationGroupUIListLayout.Padding = UDim.new(0, 2 * scale)
 
  
         local userId = LocalPlayer.UserId
@@ -570,7 +588,7 @@ if UseUi then
         headshot.BackgroundTransparency = 1
         headshot.BorderColor3 = Color3.fromRGB(0, 0, 0)
         headshot.BorderSizePixel = 0
-        headshot.Size = UDim2.fromOffset(32, 32)
+        headshot.Size = UDim2.fromOffset(32 * scale, 32 * scale)
         headshot.Image = (isReady and headshotImage) or "rbxassetid://0"
 
         local uICorner3 = Instance.new("UICorner")
@@ -594,7 +612,7 @@ if UseUi then
         userAndDisplayFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
         userAndDisplayFrame.BorderSizePixel = 0
         userAndDisplayFrame.LayoutOrder = 1
-        userAndDisplayFrame.Size = UDim2.new(1, -42, 0, 32)
+        userAndDisplayFrame.Size = UDim2.new(1, -42 * scale, 0, 32 * scale)
 
         local displayName = Instance.new("TextLabel")
         displayName.Name = "DisplayName"
@@ -605,7 +623,7 @@ if UseUi then
         )
         displayName.Text = LocalPlayer.DisplayName
         displayName.TextColor3 = Color3.fromRGB(255, 255, 255)
-        displayName.TextSize = 13
+        displayName.TextSize = 13 * scale
         displayName.TextTransparency = 0.1
         displayName.TextTruncate = Enum.TextTruncate.SplitWord
         displayName.TextXAlignment = Enum.TextXAlignment.Left
@@ -616,17 +634,17 @@ if UseUi then
         displayName.BorderColor3 = Color3.fromRGB(0, 0, 0)
         displayName.BorderSizePixel = 0
         displayName.Parent = userAndDisplayFrame
-        displayName.Size = UDim2.fromScale(1,0)
+        displayName.Size = UDim2.fromScale(1, 0)
 
         local userAndDisplayFrameUIPadding = Instance.new("UIPadding")
         userAndDisplayFrameUIPadding.Name = "UserAndDisplayFrameUIPadding"
-        userAndDisplayFrameUIPadding.PaddingLeft = UDim.new(0, 8)
-        userAndDisplayFrameUIPadding.PaddingTop = UDim.new(0, 3)
+        userAndDisplayFrameUIPadding.PaddingLeft = UDim.new(0, 8 * scale)
+        userAndDisplayFrameUIPadding.PaddingTop = UDim.new(0, 3 * scale)
         userAndDisplayFrameUIPadding.Parent = userAndDisplayFrame
 
         local userAndDisplayFrameUIListLayout = Instance.new("UIListLayout")
         userAndDisplayFrameUIListLayout.Name = "UserAndDisplayFrameUIListLayout"
-        userAndDisplayFrameUIListLayout.Padding = UDim.new(0, 1)
+        userAndDisplayFrameUIListLayout.Padding = UDim.new(0, 1 * scale)
         userAndDisplayFrameUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
         userAndDisplayFrameUIListLayout.Parent = userAndDisplayFrame
 
@@ -639,7 +657,7 @@ if UseUi then
         )
         username.Text = "@" .. LocalPlayer.Name
         username.TextColor3 = Color3.fromRGB(255, 255, 255)
-        username.TextSize = 12
+        username.TextSize = 12 * scale
         username.TextTransparency = 0.7
         username.TextTruncate = Enum.TextTruncate.SplitWord
         username.TextXAlignment = Enum.TextXAlignment.Left
@@ -651,7 +669,7 @@ if UseUi then
         username.BorderSizePixel = 0
         username.LayoutOrder = 1
         username.Parent = userAndDisplayFrame
-        username.Size = UDim2.fromScale(1,0)
+        username.Size = UDim2.fromScale(1, 0)
 
         userAndDisplayFrame.Parent = informationGroup
 
