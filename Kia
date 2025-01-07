@@ -1,4 +1,4 @@
-print('sal')
+print('xae')
 
 if UseUi then
 
@@ -9,7 +9,7 @@ if UseUi then
         local currentCamera = workspace.CurrentCamera
         if currentCamera then
             local screenSize = currentCamera.ViewportSize
-            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
+            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * 1.5
         end
         return 3
     end
@@ -17,15 +17,14 @@ if UseUi then
     local function updateScale()
         scale = calculateScale()
     end
-
+    
     if not workspace.CurrentCamera then
         workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
     end
-
+    
     updateScale()
     workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale)
     
-
     local MacLib = { 
         Options = {}, 
         Folder = "Maclib", 
@@ -33,6 +32,7 @@ if UseUi then
             return cloneref and cloneref(game:GetService(service)) or game:GetService(service)
         end
     }
+    
 
     --// Services
     local TweenService = MacLib.GetService("TweenService")
@@ -339,7 +339,7 @@ if UseUi then
             local size = enabled and windowControlSettings.sizes.enabled or windowControlSettings.sizes.disabled
             local transparency = enabled and windowControlSettings.transparencies.enabled or windowControlSettings.transparencies.disabled
 
-            button.Size = size
+            button.Size = size * scale
             button.BackgroundTransparency = transparency
             button.Active = enabled
             button.Interactable = enabled
@@ -1732,7 +1732,7 @@ if UseUi then
                         buttonImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         buttonImage.BorderSizePixel = 0
                         buttonImage.Position = UDim2.fromScale(1, 0.5)
-                        buttonImage.Size = UDim2.fromOffset(15 * scale, 15 * scale)
+                        buttonImage.Size = UDim2.fromOffset(15 , 15 )
                         buttonImage.Parent = button
 
                         local TweenSettings = {
