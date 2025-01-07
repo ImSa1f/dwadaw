@@ -1,3 +1,4 @@
+print('sa')
 
 if UseUi then
 
@@ -5075,7 +5076,7 @@ if UseUi then
             notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notification.BorderSizePixel = 0
             notification.Position = UDim2.fromScale(0.5, 0.5)
-            notification.Size = UDim2.fromOffset((50) * scale, 0)
+            notification.Size = UDim2.fromOffset((250) * scale, 0)
         
             notification.Parent = notifications
         
@@ -5125,7 +5126,7 @@ if UseUi then
             notificationTitle.BackgroundTransparency = 1
             notificationTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notificationTitle.BorderSizePixel = 0
-            notificationTitle.Size = UDim2.new(1, -12 * scale, 0, 0)
+            notificationTitle.Size = UDim2.new(1, -8 * scale, 0, 0)
         
             local notificationTitleUIPadding = Instance.new("UIPadding")
             notificationTitleUIPadding.Name = "NotificationTitleUIPadding"
@@ -5154,7 +5155,7 @@ if UseUi then
             notificationDescription.BackgroundTransparency = 1
             notificationDescription.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notificationDescription.BorderSizePixel = 0
-            notificationDescription.Size = UDim2.new(1, -12 * scale, 0, 0)
+            notificationDescription.Size = UDim2.new(1, -8 * scale, 0, 0)
         
             local notificationDescriptionUIPadding = Instance.new("UIPadding")
             notificationDescriptionUIPadding.Name = "NotificationDescriptionUIPadding"
