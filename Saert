@@ -1,3 +1,4 @@
+print('zae')
 
 if UseUi then
 
@@ -8,26 +9,39 @@ if UseUi then
         local currentCamera = workspace.CurrentCamera
         if currentCamera then
             local screenSize = currentCamera.ViewportSize
-            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
+            print("Screen Size:", screenSize.X, "x", screenSize.Y) -- Debug screen size
+            local calculatedScale = math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
+            print("Calculated Scale:", calculatedScale) -- Debug scale calculation
+            return calculatedScale
         end
+        print("CurrentCamera not ready, returning default scale of 1") -- Debug fallback case
         return 1 -- Fallback to 1 if the camera is not ready
     end
     
-    -- Ensure scale is calculated after the camera is ready
     local function updateScale()
         scale = calculateScale()
+        print("Updated Scale:", scale) -- Debug updated scale
     end
     
     -- Wait for CurrentCamera if it doesn't exist yet
     if not workspace.CurrentCamera then
+        print("Waiting for CurrentCamera...") -- Debug waiting for camera
         workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
+        print("CurrentCamera is now available!") -- Debug camera ready
     end
     
     -- Calculate the initial scale
     updateScale()
     
     -- Recalculate scale on screen resize
-    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale)
+    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
+        print("ViewportSize changed!") -- Debug resize event
+        updateScale()
+    end)
+    
+    -- Debug initial scale
+    print("Initial Scale:", scale)
+    
     
 
     local MacLib = { 
