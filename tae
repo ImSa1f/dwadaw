@@ -1,16 +1,28 @@
+print('lee')
 
 if UseUi then
-    getgenv().scaling = 1
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
     local scale = 1
     
-    local function calculateScale()
-        local currentCamera = workspace.CurrentCamera
-        if currentCamera then
-            local screenSize = currentCamera.ViewportSize
-            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * scaling or 1.2
+
+    if getgenv().scaling then
+        local function calculateScale()
+            local currentCamera = workspace.CurrentCamera
+            if currentCamera then
+                local screenSize = currentCamera.ViewportSize
+                return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * scaling
+            end
+            return 1
         end
-        return 1
+        else
+        local function calculateScale()
+            local currentCamera = workspace.CurrentCamera
+            if currentCamera then
+                local screenSize = currentCamera.ViewportSize
+                return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * 1
+            end
+            return 1
+        end
     end
     
     local function updateScale()
@@ -5042,19 +5054,6 @@ if UseUi then
                             })
                         end,
                     })
-
-
-                    configSection:Slider({
-                        Name = "Resize Gui",
-                        Default = 1,
-                        Minimum = 1,
-                        Maximum = 5,
-                        DisplayMethod = "Round",
-                        Precision = 0,
-                        Callback = function(t)
-                            scaling = t
-                        end
-                    }, "Scaling")
 
                     autoloadLabel = configSection:Label({Text = "Autoload config: None"})
 
