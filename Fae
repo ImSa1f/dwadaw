@@ -1,6 +1,6 @@
 
 if UseUi then
-    getgenv().scaling
+    getgenv().scaling = 1
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
     local scale = 1
     
