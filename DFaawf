@@ -1,4 +1,4 @@
-print('yo')
+print('sae')
 
 if UseUi then
 
@@ -18,8 +18,8 @@ if UseUi then
         scale = calculateScale()
     end
     
-        workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
-    end
+    workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
+
     
     updateScale()
     
@@ -3183,7 +3183,6 @@ if UseUi then
                                 dropdown.Size = UDim2.new(1, 0, 0, CalculateDropdownSize())
                             end
                         end
-                        
 
                         if DropdownFunctions.Settings.Options then
                             for i, v in pairs(DropdownFunctions.Settings.Options) do
@@ -3194,6 +3193,7 @@ if UseUi then
                         function DropdownFunctions:UpdateName(New)
                             dropdownName.Text = New
                         end
+
                         function DropdownFunctions:SetVisibility(State)
                             dropdown.Visible = State
                         end
@@ -3309,7 +3309,6 @@ if UseUi then
                             if not optionName then return end
                             return OptionObjs[optionName] ~= nil
                         end
-
 
                         if Flag then
                             MacLib.Options[Flag] = DropdownFunctions
@@ -4886,7 +4885,7 @@ if UseUi then
 
                     function SectionFunctions:Spacer()
                         local SpacerFunctions = {}
-                    
+
                         local spacer = Instance.new("Frame")
                         spacer.Name = "Spacer"
                         spacer.AnchorPoint = Vector2.new(0, 1)
@@ -4897,14 +4896,14 @@ if UseUi then
                         spacer.Position = UDim2.fromScale(0, 1)
                         spacer.Size = UDim2.new(1, 0, 0, 10 * scale)
                         spacer.Parent = section
-                    
+
                         function SpacerFunctions:Remove()
                             spacer:Destroy()
                         end
                         function SpacerFunctions:SetVisibility(State)
                             spacer.Visible = State
                         end
-                    
+
                         return SpacerFunctions
                     end
 
@@ -5649,8 +5648,6 @@ if UseUi then
             return acrylicBlur
         end
 
-
-
         local function _SetUserInfoState(State)
             if State then
                 headshot.Image = (isReady and headshotImage) or "rbxassetid://0"
@@ -5677,14 +5674,15 @@ if UseUi then
         function WindowFunctions:SetUserInfoState(State)
             _SetUserInfoState(State)
         end
+
         function WindowFunctions:GetUserInfoState(State)
             return showUserInfo
         end
-        
 
         function WindowFunctions:SetSize(Size)
             base.Size = Size
         end
+
         function WindowFunctions:GetSize(Size)
             return base.Size
         end
@@ -5692,6 +5690,7 @@ if UseUi then
         function WindowFunctions:SetScale(Scale)
             baseUIScale.Scale = Scale
         end
+
         function WindowFunctions:GetScale()
             return baseUIScale.Scale
         end
@@ -5976,7 +5975,7 @@ if UseUi then
                     })
                 end,
             }),
-            ShowUserInfo =Window:GlobalSetting({
+            ShowUserInfo = Window:GlobalSetting({
                 Name = "Show User Info",
                 Default = Window:GetUserInfoState(),
                 Callback = function(bool)
