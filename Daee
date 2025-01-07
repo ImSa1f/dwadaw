@@ -1,3 +1,4 @@
+print('ice')
 
 if UseUi then
     local MacLib = { 
@@ -803,7 +804,7 @@ if UseUi then
         topbar.BackgroundTransparency = 1
         topbar.BorderColor3 = Color3.fromRGB(0, 0, 0)
         topbar.BorderSizePixel = 0
-        topbar.Size = UDim2.new(1, 0, 0, 63)
+        topbar.Size = UDim2.new(1, 0, 0, 63 * scale)
 
         local divider4 = Instance.new("Frame")
         divider4.Name = "Divider"
@@ -813,7 +814,7 @@ if UseUi then
         divider4.BorderColor3 = Color3.fromRGB(0, 0, 0)
         divider4.BorderSizePixel = 0
         divider4.Position = UDim2.fromScale(0, 1)
-        divider4.Size = UDim2.new(1, 0, 0, 1)
+        divider4.Size = UDim2.new(1, 0, 0, 1 * scale)
         divider4.Parent = topbar
 
         local elements = Instance.new("Frame")
@@ -826,8 +827,8 @@ if UseUi then
 
         local uIPadding2 = Instance.new("UIPadding")
         uIPadding2.Name = "UIPadding"
-        uIPadding2.PaddingLeft = UDim.new(0, 20)
-        uIPadding2.PaddingRight = UDim.new(0, 20)
+        uIPadding2.PaddingLeft = UDim.new(0, 20 * scale)
+        uIPadding2.PaddingRight = UDim.new(0, 20 * scale)
         uIPadding2.Parent = elements
 
         local moveIcon = Instance.new("ImageButton")
@@ -840,7 +841,7 @@ if UseUi then
         moveIcon.BorderColor3 = Color3.fromRGB(0, 0, 0)
         moveIcon.BorderSizePixel = 0
         moveIcon.Position = UDim2.fromScale(1, 0.5)
-        moveIcon.Size = UDim2.fromOffset(15, 15)
+        moveIcon.Size = UDim2.fromOffset(15 * scale, 15 * scale)
         moveIcon.Parent = elements
         moveIcon.Visible = not Settings.DragStyle or Settings.DragStyle == 1
 
@@ -849,14 +850,14 @@ if UseUi then
         interact.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
         interact.Text = ""
         interact.TextColor3 = Color3.fromRGB(0, 0, 0)
-        interact.TextSize = 14
+        interact.TextSize = 14 * scale
         interact.AnchorPoint = Vector2.new(0.5, 0.5)
         interact.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         interact.BackgroundTransparency = 1
         interact.BorderColor3 = Color3.fromRGB(0, 0, 0)
         interact.BorderSizePixel = 0
         interact.Position = UDim2.fromScale(0.5, 0.5)
-        interact.Size = UDim2.fromOffset(40, 40)
+        interact.Size = UDim2.fromOffset(40 * scale, 40 * scale)
         interact.Parent = moveIcon
 
         local function ChangemoveIconState(State)
@@ -1451,7 +1452,7 @@ if UseUi then
             divider3.BorderColor3 = Color3.fromRGB(0, 0, 0)
             divider3.BorderSizePixel = 0
             divider3.Position = UDim2.fromScale(0.5, 1)
-            divider3.Size = UDim2.new(1, -21, 0, 1)
+            divider3.Size = UDim2.new(1, -21 * scale, 0, 1 * scale)
             divider3.Parent = tabGroup
 
             local sectionTabSwitchers = Instance.new("Frame")
@@ -1464,14 +1465,14 @@ if UseUi then
 
             local uIListLayout1 = Instance.new("UIListLayout")
             uIListLayout1.Name = "UIListLayout"
-            uIListLayout1.Padding = UDim.new(0, 15)
+            uIListLayout1.Padding = UDim.new(0, 15 * scale)
             uIListLayout1.HorizontalAlignment = Enum.HorizontalAlignment.Center
             uIListLayout1.SortOrder = Enum.SortOrder.LayoutOrder
             uIListLayout1.Parent = sectionTabSwitchers
 
             local uIPadding1 = Instance.new("UIPadding")
             uIPadding1.Name = "UIPadding"
-            uIPadding1.PaddingBottom = UDim.new(0, 15)
+            uIPadding1.PaddingBottom = UDim.new(0, 15 * scale)
             uIPadding1.Parent = sectionTabSwitchers
 
             sectionTabSwitchers.Parent = tabGroup
@@ -1558,7 +1559,7 @@ if UseUi then
                 tabSwitcherName.Text = Settings.Name
                 tabSwitcherName.RichText = true
                 tabSwitcherName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                tabSwitcherName.TextSize = 16
+                tabSwitcherName.TextSize = 16 * scale
                 tabSwitcherName.TextTransparency = 0.5
                 tabSwitcherName.TextTruncate = Enum.TextTruncate.SplitWord
                 tabSwitcherName.TextXAlignment = Enum.TextXAlignment.Left
@@ -1574,9 +1575,9 @@ if UseUi then
 
                 local tabSwitcherUIPadding = Instance.new("UIPadding")
                 tabSwitcherUIPadding.Name = "TabSwitcherUIPadding"
-                tabSwitcherUIPadding.PaddingLeft = UDim.new(0, 24)
-                tabSwitcherUIPadding.PaddingRight = UDim.new(0, 35)
-                tabSwitcherUIPadding.PaddingTop = UDim.new(0, 1)
+                tabSwitcherUIPadding.PaddingLeft = UDim.new(0, 24 * scale)
+                tabSwitcherUIPadding.PaddingRight = UDim.new(0, 35 * scale)
+                tabSwitcherUIPadding.PaddingTop = UDim.new(0, 1 * scale)
                 tabSwitcherUIPadding.Parent = tabSwitcher
 
                 tabSwitcher.Parent = sectionTabSwitchers
@@ -1587,15 +1588,15 @@ if UseUi then
                 elements1.BackgroundTransparency = 1
                 elements1.BorderColor3 = Color3.fromRGB(0, 0, 0)
                 elements1.BorderSizePixel = 0
-                elements1.Position = UDim2.fromOffset(0, 63)
-                elements1.Size = UDim2.new(1, 0, 1, -63)
+                elements1.Position = UDim2.fromOffset(0, 63 * scale)
+                elements1.Size = UDim2.new(1, 0, 1, -63 * scale)
                 elements1.ClipsDescendants = true
 
                 local elementsUIPadding = Instance.new("UIPadding")
                 elementsUIPadding.Name = "ElementsUIPadding"
-                elementsUIPadding.PaddingRight = UDim.new(0, 5)
-                elementsUIPadding.PaddingTop = UDim.new(0, 10)
-                elementsUIPadding.PaddingBottom = UDim.new(0, 10)
+                elementsUIPadding.PaddingRight = UDim.new(0, 5 * scale)
+                elementsUIPadding.PaddingTop = UDim.new(0, 10 * scale)
+                elementsUIPadding.PaddingBottom = UDim.new(0, 10 * scale)
                 elementsUIPadding.Parent = elements1
 
                 local elementsScrolling = Instance.new("ScrollingFrame")
@@ -1615,15 +1616,15 @@ if UseUi then
 
                 local elementsScrollingUIPadding = Instance.new("UIPadding")
                 elementsScrollingUIPadding.Name = "ElementsScrollingUIPadding"
-                elementsScrollingUIPadding.PaddingBottom = UDim.new(0, 5)
-                elementsScrollingUIPadding.PaddingLeft = UDim.new(0, 11)
-                elementsScrollingUIPadding.PaddingRight = UDim.new(0, 3)
-                elementsScrollingUIPadding.PaddingTop = UDim.new(0, 5)
+                elementsScrollingUIPadding.PaddingBottom = UDim.new(0, 5 * scale)
+                elementsScrollingUIPadding.PaddingLeft = UDim.new(0, 11 * scale)
+                elementsScrollingUIPadding.PaddingRight = UDim.new(0, 3 * scale)
+                elementsScrollingUIPadding.PaddingTop = UDim.new(0, 5 * scale)
                 elementsScrollingUIPadding.Parent = elementsScrolling
 
                 local elementsScrollingUIListLayout = Instance.new("UIListLayout")
                 elementsScrollingUIListLayout.Name = "ElementsScrollingUIListLayout"
-                elementsScrollingUIListLayout.Padding = UDim.new(0, 15)
+                elementsScrollingUIListLayout.Padding = UDim.new(0, 15 * scale)
                 elementsScrollingUIListLayout.FillDirection = Enum.FillDirection.Horizontal
                 elementsScrollingUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                 elementsScrollingUIListLayout.Parent = elementsScrolling
@@ -1636,11 +1637,11 @@ if UseUi then
                 left.BorderColor3 = Color3.fromRGB(0, 0, 0)
                 left.BorderSizePixel = 0
                 left.Position = UDim2.fromScale(0.512, 0)
-                left.Size = UDim2.new(0.5, -10, 0, 0)
+                left.Size = UDim2.new(0.5, -10 * scale, 0, 0)
 
                 local leftUIListLayout = Instance.new("UIListLayout")
                 leftUIListLayout.Name = "LeftUIListLayout"
-                leftUIListLayout.Padding = UDim.new(0, 15)
+                leftUIListLayout.Padding = UDim.new(0, 15 * scale)
                 leftUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                 leftUIListLayout.Parent = left
 
@@ -1655,11 +1656,11 @@ if UseUi then
                 right.BorderSizePixel = 0
                 right.LayoutOrder = 1
                 right.Position = UDim2.fromScale(0.512, 0)
-                right.Size = UDim2.new(0.5, -10, 0, 0)
+                right.Size = UDim2.new(0.5, -10 * scale, 0, 0)
 
                 local rightUIListLayout = Instance.new("UIListLayout")
                 rightUIListLayout.Name = "RightUIListLayout"
-                rightUIListLayout.Padding = UDim.new(0, 15)
+                rightUIListLayout.Padding = UDim.new(0, 15 * scale)
                 rightUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                 rightUIListLayout.Parent = right
 
