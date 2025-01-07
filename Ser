@@ -1,4 +1,4 @@
-print('yo')
+print('ytooa')
 
 if UseUi then
     local MacLib = { 
@@ -5593,6 +5593,8 @@ if UseUi then
             return acrylicBlur
         end
 
+
+        --[[
         local function _SetUserInfoState(State)
             if State then
                 headshot.Image = (isReady and headshotImage) or "rbxassetid://0"
@@ -5622,6 +5624,7 @@ if UseUi then
         function WindowFunctions:GetUserInfoState(State)
             return showUserInfo
         end
+        --]]
 
         function WindowFunctions:SetSize(Size)
             base.Size = Size
