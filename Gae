@@ -1,5 +1,7 @@
+print('sa')
 
 if UseUi then
+    getgenv().scaling
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
     local scale = 1
     
@@ -5042,7 +5044,21 @@ if UseUi then
                         end,
                     })
 
+
+
                     autoloadLabel = configSection:Label({Text = "Autoload config: None"})
+
+                    configSection:Slider({
+                        Name = "Resize Gui",
+                        Default = 1,
+                        Minimum = 1,
+                        Maximum = 5,
+                        DisplayMethod = "Round",
+                        Precision = 0,
+                        Callback = function(t)
+                            scaling = t
+                        end
+                    }, "Scaling")
 
                     if isfile(MacLib.Folder .. "/settings/autoload.txt") then
                         local name = readfile(MacLib.Folder .. "/settings/autoload.txt")
