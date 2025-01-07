@@ -1,3 +1,4 @@
+print('a')
 
 if UseUi then
 
@@ -333,25 +334,29 @@ if UseUi then
         uICorner2.Parent = maximize
 
         maximize.Parent = controls
-
         local function applyState(button, enabled)
             local size = enabled and windowControlSettings.sizes.enabled or windowControlSettings.sizes.disabled
             local transparency = enabled and windowControlSettings.transparencies.enabled or windowControlSettings.transparencies.disabled
-
-            button.Size = size * scale
+        
+            button.Size = UDim2.new(size.X.Scale, size.X.Offset * scale, size.Y.Scale, size.Y.Offset * scale)
             button.BackgroundTransparency = transparency
             button.Active = enabled
             button.Interactable = enabled
+        
 
             for _, child in ipairs(button:GetChildren()) do
                 if child:IsA("UIStroke") then
                     child.Transparency = transparency
                 end
             end
+        
             if not enabled then
-                stroke:Clone().Parent = button
+                local newStroke = Instance.new("UIStroke")
+                newStroke.Transparency = transparency
+                newStroke.Parent = button
             end
         end
+        
 
         applyState(maximize, false)
 
