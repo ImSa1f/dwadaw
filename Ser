@@ -1,3 +1,4 @@
+print('yo')
 
 if UseUi then
     local MacLib = { 
@@ -536,6 +537,7 @@ if UseUi then
         informationGroupUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
         informationGroupUIListLayout.Parent = informationGroup
 
+        --[[
         local userId = LocalPlayer.UserId
         local thumbType = Enum.ThumbnailType.AvatarBust
         local thumbSize = Enum.ThumbnailSize.Size48x48
@@ -641,6 +643,7 @@ if UseUi then
         userInfoUIPadding.Parent = userInfo
 
         userInfo.Parent = sidebarGroup
+        --]]
 
         local sidebarGroupUIPadding = Instance.new("UIPadding")
         sidebarGroupUIPadding.Name = "SidebarGroupUIPadding"
@@ -1436,6 +1439,7 @@ if UseUi then
             tabGroup.Parent = tabSwitchersScrollingFrame
 
             function SectionFunctions:Tab(Settings)
+                --tabs edited
                 local TabFunctions = {Settings = Settings}
                 local tabSwitcher = Instance.new("TextButton")
                 tabSwitcher.Name = "TabSwitcher"
@@ -1450,21 +1454,23 @@ if UseUi then
                 tabSwitcher.BorderColor3 = Color3.fromRGB(0, 0, 0)
                 tabSwitcher.BorderSizePixel = 0
 
+
                 tabSwitcher.Position = UDim2.fromScale(0.5, 0) 
-                tabSwitcher.Size = UDim2.new(0.8, 0, 0, 40) 
+                tabSwitcher.Size = UDim2.new(0.9, 0, 0, 50) 
+
 
                 local uiScale = Instance.new("UIScale")
                 uiScale.Parent = tabSwitcher
-                
+
+
                 local function adjustSize()
                     local screenSize = workspace.CurrentCamera.ViewportSize
-                    local scaleFactor = math.clamp(screenSize.X / 1920, 0.5, 1)
+                    local scaleFactor = math.clamp(screenSize.X / 1920, 0.6, 1.2)
                     uiScale.Scale = scaleFactor
                 end
 
                 workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(adjustSize)
-                adjustSize()
-                
+                adjustSize() 
 
                 tabIndex += 1
                 tabSwitcher.LayoutOrder = tabIndex
