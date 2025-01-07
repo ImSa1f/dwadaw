@@ -1,46 +1,29 @@
+print('yo')
 
 if UseUi then
 
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
-    local scale = 1 -- Initialize scale with a default value
+    local scale = 1 
     
     local function calculateScale()
         local currentCamera = workspace.CurrentCamera
         if currentCamera then
             local screenSize = currentCamera.ViewportSize
-            print("Screen Size:", screenSize.X, "x", screenSize.Y) -- Debug screen size
-            local calculatedScale = math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
-            print("Calculated Scale:", calculatedScale) -- Debug scale calculation
-            return calculatedScale
+            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT)
         end
-        print("CurrentCamera not ready, returning default scale of 1") -- Debug fallback case
-        return 1 -- Fallback to 1 if the camera is not ready
+        return 1 
     end
     
     local function updateScale()
         scale = calculateScale()
-        print("Updated Scale:", scale) -- Debug updated scale
     end
     
-    -- Wait for CurrentCamera if it doesn't exist yet
-    if not workspace.CurrentCamera then
-        print("Waiting for CurrentCamera...") -- Debug waiting for camera
         workspace:GetPropertyChangedSignal("CurrentCamera"):Wait()
-        print("CurrentCamera is now available!") -- Debug camera ready
     end
     
-    -- Calculate the initial scale
     updateScale()
     
-    -- Recalculate scale on screen resize
-    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-        print("ViewportSize changed!") -- Debug resize event
-        updateScale()
-    end)
-    
-    -- Debug initial scale
-    print("Initial Scale:", scale)
-    
+    workspace.CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateScale)
     
 
     local MacLib = { 
@@ -2452,7 +2435,7 @@ if UseUi then
                         keybind.BackgroundTransparency = 1
                         keybind.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         keybind.BorderSizePixel = 0
-                        keybind.Size = UDim2.new(1, 0, 0, 38)
+                        keybind.Size = UDim2.new(1, 0, 0, 38 * scale)
                         keybind.Parent = section
 
                         local keybindName = Instance.new("TextLabel")
@@ -2461,7 +2444,7 @@ if UseUi then
                         keybindName.Text = KeybindFunctions.Settings.Name
                         keybindName.RichText = true
                         keybindName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        keybindName.TextSize = 13
+                        keybindName.TextSize = 13 * scale
                         keybindName.TextTransparency = 0.5
                         keybindName.TextTruncate = Enum.TextTruncate.None
                         keybindName.TextWrapped = true
@@ -2484,7 +2467,7 @@ if UseUi then
                         binderBox.PlaceholderText = "..."
                         binderBox.Text = ""
                         binderBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        binderBox.TextSize = 12
+                        binderBox.TextSize = 12 * scale
                         binderBox.TextTransparency = 0.1
                         binderBox.AnchorPoint = Vector2.new(1, 0.5)
                         binderBox.AutomaticSize = Enum.AutomaticSize.X
@@ -2495,7 +2478,7 @@ if UseUi then
                         binderBox.ClipsDescendants = true
                         binderBox.LayoutOrder = 1
                         binderBox.Position = UDim2.fromScale(1, 0.5)
-                        binderBox.Size = UDim2.fromOffset(21, 21)
+                        binderBox.Size = UDim2.fromOffset(21 * scale, 21 * scale)
 
                         local binderBoxUICorner = Instance.new("UICorner")
                         binderBoxUICorner.Name = "BinderBoxUICorner"
@@ -2511,8 +2494,8 @@ if UseUi then
 
                         local binderBoxUIPadding = Instance.new("UIPadding")
                         binderBoxUIPadding.Name = "BinderBoxUIPadding"
-                        binderBoxUIPadding.PaddingLeft = UDim.new(0, 5)
-                        binderBoxUIPadding.PaddingRight = UDim.new(0, 5)
+                        binderBoxUIPadding.PaddingLeft = UDim.new(0, 5 * scale)
+                        binderBoxUIPadding.PaddingRight = UDim.new(0, 5 * scale)
                         binderBoxUIPadding.Parent = binderBox
 
                         local binderBoxUISizeConstraint = Instance.new("UISizeConstraint")
@@ -2636,14 +2619,14 @@ if UseUi then
                         dropdown.BackgroundTransparency = 0.985
                         dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         dropdown.BorderSizePixel = 0
-                        dropdown.Size = UDim2.new(1, 0, 0, 38)
+                        dropdown.Size = UDim2.new(1, 0, 0, 38 * scale)
                         dropdown.Parent = section
                         dropdown.ClipsDescendants = true
 
                         local dropdownUIPadding = Instance.new("UIPadding")
                         dropdownUIPadding.Name = "DropdownUIPadding"
-                        dropdownUIPadding.PaddingLeft = UDim.new(0, 15)
-                        dropdownUIPadding.PaddingRight = UDim.new(0, 15)
+                        dropdownUIPadding.PaddingLeft = UDim.new(0, 15 * scale)
+                        dropdownUIPadding.PaddingRight = UDim.new(0, 15 * scale)
                         dropdownUIPadding.Parent = dropdown
 
                         local interact = Instance.new("TextButton")
@@ -2665,7 +2648,7 @@ if UseUi then
                         dropdownName.Text = Settings.Default and (DropdownFunctions.Settings.Name .. " • " .. table.concat(Selected, ", ")) or (DropdownFunctions.Settings.Name .. "...")
                         dropdownName.RichText = true
                         dropdownName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        dropdownName.TextSize = 13
+                        dropdownName.TextSize = 13 * scale
                         dropdownName.TextTransparency = 0.5
                         dropdownName.TextTruncate = Enum.TextTruncate.SplitWord
                         dropdownName.TextXAlignment = Enum.TextXAlignment.Left
@@ -2674,7 +2657,7 @@ if UseUi then
                         dropdownName.BackgroundTransparency = 1
                         dropdownName.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         dropdownName.BorderSizePixel = 0
-                        dropdownName.Size = UDim2.new(1, -20, 0, 38)
+                        dropdownName.Size = UDim2.new(1, -20 * scale, 0, 38 * scale)
                         dropdownName.Parent = dropdown
 
                         local dropdownUIStroke = Instance.new("UIStroke")
@@ -2699,7 +2682,7 @@ if UseUi then
                         dropdownImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         dropdownImage.BorderSizePixel = 0
                         dropdownImage.Position = UDim2.new(1, 0, 0, 12)
-                        dropdownImage.Size = UDim2.fromOffset(14, 14)
+                        dropdownImage.Size = UDim2.fromOffset(14 * scale, 14 * scale)
                         dropdownImage.Parent = dropdown
 
                         local dropdownFrame = Instance.new("Frame")
@@ -2715,13 +2698,13 @@ if UseUi then
 
                         local dropdownFrameUIPadding = Instance.new("UIPadding")
                         dropdownFrameUIPadding.Name = "DropdownFrameUIPadding"
-                        dropdownFrameUIPadding.PaddingTop = UDim.new(0, 38)
-                        dropdownFrameUIPadding.PaddingBottom = UDim.new(0, 10)
+                        dropdownFrameUIPadding.PaddingTop = UDim.new(0, 38 * scale)
+                        dropdownFrameUIPadding.PaddingBottom = UDim.new(0, 10 * scale)
                         dropdownFrameUIPadding.Parent = dropdownFrame
 
                         local dropdownFrameUIListLayout = Instance.new("UIListLayout")
                         dropdownFrameUIListLayout.Name = "DropdownFrameUIListLayout"
-                        dropdownFrameUIListLayout.Padding = UDim.new(0, 5)
+                        dropdownFrameUIListLayout.Padding = UDim.new(0, 5 * scale)
                         dropdownFrameUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                         dropdownFrameUIListLayout.Parent = dropdownFrame
 
@@ -2770,7 +2753,7 @@ if UseUi then
                         searchBox.PlaceholderText = "Search..."
                         searchBox.Text = ""
                         searchBox.TextColor3 = Color3.fromRGB(200, 200, 200)
-                        searchBox.TextSize = 14
+                        searchBox.TextSize = 14 * scale
                         searchBox.TextXAlignment = Enum.TextXAlignment.Left
                         searchBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                         searchBox.BackgroundTransparency = 1
@@ -3091,11 +3074,11 @@ if UseUi then
                             option.BackgroundTransparency = 1
                             option.BorderColor3 = Color3.fromRGB(0, 0, 0)
                             option.BorderSizePixel = 0
-                            option.Size = UDim2.new(1, 0, 0, 30)
+                            option.Size = UDim2.new(1, 0, 0, 30 * scale)
                         
                             local optionUIPadding = Instance.new("UIPadding")
                             optionUIPadding.Name = "OptionUIPadding"
-                            optionUIPadding.PaddingLeft = UDim.new(0, 15)
+                            optionUIPadding.PaddingLeft = UDim.new(0, 15 * scale)
                             optionUIPadding.Parent = option
                         
                             local optionName = Instance.new("TextLabel")
@@ -3104,7 +3087,7 @@ if UseUi then
                             optionName.Text = optionText
                             optionName.RichText = true
                             optionName.TextColor3 = Color3.fromRGB(255, 255, 255)
-                            optionName.TextSize = 13
+                            optionName.TextSize = 13 * scale
                             optionName.TextTransparency = 0.5
                             optionName.TextTruncate = Enum.TextTruncate.None
                             optionName.TextWrapped = true
@@ -3133,7 +3116,7 @@ if UseUi then
                             checkmark.FontFace = Font.new(assets.interFont)
                             checkmark.Text = "✓"
                             checkmark.TextColor3 = Color3.fromRGB(255, 255, 255)
-                            checkmark.TextSize = 13
+                            checkmark.TextSize = 13 * scale
                             checkmark.TextTransparency = 1
                             checkmark.TextXAlignment = Enum.TextXAlignment.Left
                             checkmark.TextYAlignment = Enum.TextYAlignment.Top
@@ -3349,7 +3332,7 @@ if UseUi then
                         colorpicker.BackgroundTransparency = 1
                         colorpicker.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         colorpicker.BorderSizePixel = 0
-                        colorpicker.Size = UDim2.new(1, 0, 0, 38)
+                        colorpicker.Size = UDim2.new(1, 0, 0, 38 * scale)
                         colorpicker.Parent = section
 
                         local colorpickerName = Instance.new("TextLabel")
@@ -3385,7 +3368,7 @@ if UseUi then
                         colorCbg.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         colorCbg.BorderSizePixel = 0
                         colorCbg.Position = UDim2.fromScale(1, 0.5)
-                        colorCbg.Size = UDim2.fromOffset(21, 21)
+                        colorCbg.Size = UDim2.fromOffset(21 * scale, 21 * scale)
 
                         local colorC = Instance.new("Frame")
                         colorC.Name = "Color"
@@ -3398,7 +3381,7 @@ if UseUi then
 
                         local uICorner = Instance.new("UICorner")
                         uICorner.Name = "UICorner"
-                        uICorner.CornerRadius = UDim.new(0, 6)
+                        uICorner.CornerRadius = UDim.new(0, 8 * scale)
                         uICorner.Parent = colorC
 
                         local interact = Instance.new("TextButton")
@@ -3406,7 +3389,7 @@ if UseUi then
                         interact.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json")
                         interact.Text = ""
                         interact.TextColor3 = Color3.fromRGB(0, 0, 0)
-                        interact.TextSize = 14
+                        interact.TextSize = 14 * scale
                         interact.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                         interact.BackgroundTransparency = 1
                         interact.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -3686,8 +3669,8 @@ if UseUi then
 
                         local inputBoxUIPadding = Instance.new("UIPadding")
                         inputBoxUIPadding.Name = "InputBoxUIPadding"
-                        inputBoxUIPadding.PaddingLeft = UDim.new(0, 8)
-                        inputBoxUIPadding.PaddingRight = UDim.new(0, 10)
+                        inputBoxUIPadding.PaddingLeft = UDim.new(0, 5 * scale)
+                        inputBoxUIPadding.PaddingRight = UDim.new(0, 5 * scale)
                         inputBoxUIPadding.Parent = inputBox
 
                         inputBox.Parent = red
@@ -4250,7 +4233,7 @@ if UseUi then
                         paragraphHeader.RichText = true
                         paragraphHeader.Text = ColorpickerFunctions.Settings.Name
                         paragraphHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        paragraphHeader.TextSize = 18
+                        paragraphHeader.TextSize = 15 * scale
                         paragraphHeader.TextTransparency = 0.4
                         paragraphHeader.TextWrapped = true
                         paragraphHeader.TextYAlignment = Enum.TextYAlignment.Top
@@ -4664,7 +4647,7 @@ if UseUi then
                         headerText.RichText = true
                         headerText.Text = HeaderFunctions.Settings.Text or HeaderFunctions.Settings.Name
                         headerText.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        headerText.TextSize = 16
+                        headerText.TextSize = 16 * scale
                         headerText.TextTransparency = 0.3
                         headerText.TextWrapped = true
                         headerText.TextXAlignment = Enum.TextXAlignment.Left
@@ -4699,7 +4682,7 @@ if UseUi then
                         label.BackgroundTransparency = 1
                         label.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         label.BorderSizePixel = 0
-                        label.Size = UDim2.new(1, 0, 0, 38)
+                        label.Size = UDim2.new(1, 0, 0, 38 * scale)
                         label.Parent = section
                     
                         local labelText = Instance.new("TextLabel")
@@ -4708,7 +4691,7 @@ if UseUi then
                         labelText.RichText = true
                         labelText.Text = LabelFunctions.Settings.Text or LabelFunctions.Settings.Name
                         labelText.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        labelText.TextSize = 13
+                        labelText.TextSize = 13 * scale
                         labelText.TextTransparency = 0.5
                         labelText.TextWrapped = true
                         labelText.TextXAlignment = Enum.TextXAlignment.Left
@@ -4735,7 +4718,6 @@ if UseUi then
                         end
                         return LabelFunctions
                     end
-                    
 
                     function SectionFunctions:SubLabel(Settings, Flag)
                         local SubLabelFunctions = {Settings = Settings}
@@ -4754,9 +4736,9 @@ if UseUi then
                         subLabelText.Name = "SubLabelText"
                         subLabelText.FontFace = Font.new(assets.interFont)
                         subLabelText.RichText = true
-                        subLabelText.Text = SubLabelFunctions.Settings.Text or SubLabelFunctions.Settings.Name -- Settings.Name Deprecated use Settings.Text
+                        subLabelText.Text = SubLabelFunctions.Settings.Text or SubLabelFunctions.Settings.Name
                         subLabelText.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        subLabelText.TextSize = 12
+                        subLabelText.TextSize = 12 * scale
                         subLabelText.TextTransparency = 0.7
                         subLabelText.TextWrapped = true
                         subLabelText.TextXAlignment = Enum.TextXAlignment.Left
@@ -4828,7 +4810,7 @@ if UseUi then
                         paragraphBody.RichText = true
                         paragraphBody.Text = ParagraphFunctions.Settings.Body
                         paragraphBody.TextColor3 = Color3.fromRGB(255, 255, 255)
-                        paragraphBody.TextSize = 13
+                        paragraphBody.TextSize = 13 * scale
                         paragraphBody.TextTransparency = 0.5
                         paragraphBody.TextWrapped = true
                         paragraphBody.TextXAlignment = Enum.TextXAlignment.Left
@@ -4859,7 +4841,7 @@ if UseUi then
 
                     function SectionFunctions:Divider()
                         local DividerFunctions = {}
-
+                    
                         local divider = Instance.new("Frame")
                         divider.Name = "Divider"
                         divider.AnchorPoint = Vector2.new(0, 1)
@@ -4869,42 +4851,42 @@ if UseUi then
                         divider.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         divider.BorderSizePixel = 0
                         divider.Position = UDim2.fromScale(0, 1)
-                        divider.Size = UDim2.new(1, 0, 0, 1)
+                        divider.Size = UDim2.new(1, 0, 0, 1 * scale)
                         divider.Parent = section
-
+                    
                         local uIPadding = Instance.new("UIPadding")
                         uIPadding.Name = "UIPadding"
-                        uIPadding.PaddingBottom = UDim.new(0, 8)
-                        uIPadding.PaddingTop = UDim.new(0, 8)
+                        uIPadding.PaddingBottom = UDim.new(0, 10 * scale)
+                        uIPadding.PaddingTop = UDim.new(0, 10 * scale)
                         uIPadding.Parent = divider
-
+                    
                         local uIListLayout = Instance.new("UIListLayout")
                         uIListLayout.Name = "UIListLayout"
                         uIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
                         uIListLayout.Parent = divider
-
+                    
                         local line = Instance.new("Frame")
                         line.Name = "Line"
                         line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
                         line.BackgroundTransparency = 0.9
                         line.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         line.BorderSizePixel = 0
-                        line.Size = UDim2.new(1, 0, 0, 1)
+                        line.Size = UDim2.new(1, 0, 0, 1 * scale)
                         line.Parent = divider
-
+                    
                         function DividerFunctions:Remove()
                             divider:Destroy()
                         end
                         function DividerFunctions:SetVisibility(State)
                             divider.Visible = State
                         end
-
+                    
                         return DividerFunctions
                     end
 
                     function SectionFunctions:Spacer()
                         local SpacerFunctions = {}
-
+                    
                         local spacer = Instance.new("Frame")
                         spacer.Name = "Spacer"
                         spacer.AnchorPoint = Vector2.new(0, 1)
@@ -4913,15 +4895,16 @@ if UseUi then
                         spacer.BorderColor3 = Color3.fromRGB(0, 0, 0)
                         spacer.BorderSizePixel = 0
                         spacer.Position = UDim2.fromScale(0, 1)
+                        spacer.Size = UDim2.new(1, 0, 0, 10 * scale)
                         spacer.Parent = section
-
+                    
                         function SpacerFunctions:Remove()
                             spacer:Destroy()
                         end
                         function SpacerFunctions:SetVisibility(State)
                             spacer.Visible = State
                         end
-
+                    
                         return SpacerFunctions
                     end
 
@@ -5667,7 +5650,7 @@ if UseUi then
         end
 
 
-        --[[
+
         local function _SetUserInfoState(State)
             if State then
                 headshot.Image = (isReady and headshotImage) or "rbxassetid://0"
@@ -5697,7 +5680,7 @@ if UseUi then
         function WindowFunctions:GetUserInfoState(State)
             return showUserInfo
         end
-        --]]
+        
 
         function WindowFunctions:SetSize(Size)
             base.Size = Size
@@ -5992,9 +5975,8 @@ if UseUi then
                         Lifetime = 5
                     })
                 end,
-            })
-            --[[
-            ShowUserInfo = Window:GlobalSetting({
+            }),
+            ShowUserInfo =Window:GlobalSetting({
                 Name = "Show User Info",
                 Default = Window:GetUserInfoState(),
                 Callback = function(bool)
@@ -6006,7 +5988,6 @@ if UseUi then
                     })
                 end,
             })
-            --]]
         }
 
         local tabGroups = {
