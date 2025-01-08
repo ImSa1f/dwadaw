@@ -1,28 +1,17 @@
-print('lee')
+print('sa')
 
 if UseUi then
     local BASE_WIDTH, BASE_HEIGHT = 1920, 1080
     local scale = 1
     
-
-    if getgenv().scaling then
-        local function calculateScale()
-            local currentCamera = workspace.CurrentCamera
-            if currentCamera then
-                local screenSize = currentCamera.ViewportSize
-                return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * scaling
-            end
-            return 1
+    local function calculateScale()
+        local currentCamera = workspace.CurrentCamera
+        if currentCamera then
+            local screenSize = currentCamera.ViewportSize
+            local scalingFactor = getgenv().scaling or 1
+            return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * scalingFactor
         end
-        else
-        local function calculateScale()
-            local currentCamera = workspace.CurrentCamera
-            if currentCamera then
-                local screenSize = currentCamera.ViewportSize
-                return math.min(screenSize.X / BASE_WIDTH, screenSize.Y / BASE_HEIGHT) * 1
-            end
-            return 1
-        end
+        return 1 
     end
     
     local function updateScale()
@@ -5088,7 +5077,7 @@ if UseUi then
             notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notification.BorderSizePixel = 0
             notification.Position = UDim2.fromScale(0.5, 0.5)
-            notification.Size = UDim2.fromOffset((150) * scale, 0) -- Reduced width
+            notification.Size = UDim2.fromOffset((200) * scale, 0) -- Increased width
         
             notification.Parent = notifications
         
@@ -5101,7 +5090,7 @@ if UseUi then
         
             local notificationUICorner = Instance.new("UICorner")
             notificationUICorner.Name = "NotificationUICorner"
-            notificationUICorner.CornerRadius = UDim.new(0, 6 * scale) -- Further reduced corner radius
+            notificationUICorner.CornerRadius = UDim.new(0, 8 * scale) -- Slightly increased corner radius
             notificationUICorner.Parent = notification
         
             local notificationUIScale = Instance.new("UIScale")
@@ -5128,7 +5117,7 @@ if UseUi then
             notificationTitle.RichText = true
             notificationTitle.Text = Settings.Title
             notificationTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-            notificationTitle.TextSize = 9 * scale -- Further reduced text size
+            notificationTitle.TextSize = 11 * scale -- Slightly increased text size
             notificationTitle.TextTransparency = 0.2
             notificationTitle.TextTruncate = Enum.TextTruncate.SplitWord
             notificationTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -5138,11 +5127,11 @@ if UseUi then
             notificationTitle.BackgroundTransparency = 1
             notificationTitle.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notificationTitle.BorderSizePixel = 0
-            notificationTitle.Size = UDim2.new(1, -6 * scale, 0, 0) -- Adjusted padding
+            notificationTitle.Size = UDim2.new(1, -8 * scale, 0, 0) -- Adjusted padding
         
             local notificationTitleUIPadding = Instance.new("UIPadding")
             notificationTitleUIPadding.Name = "NotificationTitleUIPadding"
-            notificationTitleUIPadding.PaddingRight = UDim.new(0, 15 * scale) -- Reduced padding
+            notificationTitleUIPadding.PaddingRight = UDim.new(0, 20 * scale) -- Slightly increased padding
             notificationTitleUIPadding.Parent = notificationTitle
         
             notificationTitle.Parent = notificationInformation
@@ -5156,7 +5145,7 @@ if UseUi then
             )
             notificationDescription.Text = Settings.Description
             notificationDescription.TextColor3 = Color3.fromRGB(255, 255, 255)
-            notificationDescription.TextSize = 8 * scale -- Further reduced text size
+            notificationDescription.TextSize = 10 * scale -- Slightly increased text size
             notificationDescription.TextTransparency = 0.5
             notificationDescription.TextWrapped = true
             notificationDescription.RichText = true
@@ -5167,22 +5156,22 @@ if UseUi then
             notificationDescription.BackgroundTransparency = 1
             notificationDescription.BorderColor3 = Color3.fromRGB(0, 0, 0)
             notificationDescription.BorderSizePixel = 0
-            notificationDescription.Size = UDim2.new(1, -6 * scale, 0, 0)
+            notificationDescription.Size = UDim2.new(1, -8 * scale, 0, 0)
         
             local notificationDescriptionUIPadding = Instance.new("UIPadding")
             notificationDescriptionUIPadding.Name = "NotificationDescriptionUIPadding"
-            notificationDescriptionUIPadding.PaddingRight = UDim.new(0, 15 * scale) -- Reduced padding
-            notificationDescriptionUIPadding.PaddingTop = UDim.new(0, 10 * scale) -- Adjusted padding
+            notificationDescriptionUIPadding.PaddingRight = UDim.new(0, 20 * scale) -- Slightly increased padding
+            notificationDescriptionUIPadding.PaddingTop = UDim.new(0, 12 * scale) -- Adjusted padding
             notificationDescriptionUIPadding.Parent = notificationDescription
         
             notificationDescription.Parent = notificationInformation
         
             local notificationUIPadding = Instance.new("UIPadding")
             notificationUIPadding.Name = "NotificationUIPadding"
-            notificationUIPadding.PaddingBottom = UDim.new(0, 8 * scale) -- Adjusted padding
-            notificationUIPadding.PaddingLeft = UDim.new(0, 6 * scale) -- Adjusted padding
-            notificationUIPadding.PaddingRight = UDim.new(0, 6 * scale) -- Adjusted padding
-            notificationUIPadding.PaddingTop = UDim.new(0, 6 * scale) -- Adjusted padding
+            notificationUIPadding.PaddingBottom = UDim.new(0, 10 * scale) -- Slightly increased padding
+            notificationUIPadding.PaddingLeft = UDim.new(0, 8 * scale) -- Slightly increased padding
+            notificationUIPadding.PaddingRight = UDim.new(0, 8 * scale) -- Slightly increased padding
+            notificationUIPadding.PaddingTop = UDim.new(0, 8 * scale) -- Slightly increased padding
             notificationUIPadding.Parent = notificationInformation
         
             notificationInformation.Parent = notification
@@ -5202,7 +5191,7 @@ if UseUi then
             interactable.FontFace = Font.new(assets.interFont)
             interactable.Text = "✓"
             interactable.TextColor3 = Color3.fromRGB(255, 255, 255)
-            interactable.TextSize = 10 * scale -- Further reduced text size
+            interactable.TextSize = 12 * scale -- Slightly increased text size
             interactable.TextTransparency = 0.2
             interactable.AnchorPoint = Vector2.new(1, 0.5)
             interactable.AutomaticSize = Enum.AutomaticSize.XY
@@ -5216,9 +5205,9 @@ if UseUi then
         
             local uIPadding = Instance.new("UIPadding")
             uIPadding.Name = "UIPadding"
-            uIPadding.PaddingBottom = UDim.new(0, 4 * scale) -- Adjusted padding
-            uIPadding.PaddingRight = UDim.new(0, 8 * scale) -- Adjusted padding
-            uIPadding.PaddingTop = UDim.new(0, 4 * scale) -- Adjusted padding
+            uIPadding.PaddingBottom = UDim.new(0, 6 * scale) -- Slightly increased padding
+            uIPadding.PaddingRight = UDim.new(0, 10 * scale) -- Slightly increased padding
+            uIPadding.PaddingTop = UDim.new(0, 6 * scale) -- Slightly increased padding
             uIPadding.Parent = notificationControls
         
             notificationControls.Parent = notification
@@ -5276,7 +5265,7 @@ if UseUi then
             end
         
             function NotificationFunctions:Resize(X)
-                local targ = X or 150 -- Smaller width
+                local targ = X or 200 -- Slightly larger width
                 notification.Size = UDim2.fromOffset(targ * scale, 0)
             end
         
